@@ -1,0 +1,22 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "build:css": "tailwindcss -i ./static/src/input.css -o ./static/css/output.css",
+  "watch:css": "tailwindcss -i ./static/src/input.css -o ./static/css/output.css --watch"
+},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heijing-black-whale-ht"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}

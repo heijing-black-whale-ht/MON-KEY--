@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+body {
+    outline: 3px solid red;
+}
