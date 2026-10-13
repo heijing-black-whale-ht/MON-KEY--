@@ -1,0 +1,262 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa; /* Clean background fallback */
+    padding-bottom: 60px; /* Space for footer */
+}
+
+/* Header Styles */
+.site-header {
+    background-color: #ffffff; /* Switched to white for a cleaner look, change back to #0000ff if desired */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 10px 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Fixed Logo Container and Image Constraints */
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: block;
+    height: 50px; /* Controls the actual height of your header row */
+}
+
+.logo img {
+    height: 100%;  /* Scales smoothly to match the anchor height */
+    width: auto;   /* Maintains proper image aspect ratio */
+    display: block;
+}
+
+/* Navigation Link Alignment */
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.nav-menu a {
+    color: #0f0b0a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Header Action Icons */
+.header-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Main Content Area */
+main {
+    max-width: 800px; /* Narrower layout looks cleaner for a todo app */
+    margin: 40px auto;
+    padding: 0 2rem;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Add Task Form Styling */
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+form input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+/* Task List Styling (Removes Default Bullets) */
+main ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+main ul li {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+
+/* Pushes action links to the right side of the row */
+main ul li a {
+    margin-left: auto; 
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 4px 8px;
+}
+
+main ul li a[href*="complete"] {
+    color: #2ecc71;
+}
+
+main ul li a[href*="delete"] {
+    color: #e74c3c;
+    margin-left: 10px; /* Adds space if both Done and Delete are present */
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #777;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+/* Container Task List spacing adjustments */
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+}
+
+/* Individual Task Row Component */
+.task-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+/* Dynamic State Styling */
+.task-title {
+    flex: 1; /* Automatically pushes delete link to the far right edge */
+    font-size: 1rem;
+    color: #333;
+    transition: color 0.2s ease;
+}
+
+.task-completed .task-title {
+    text-decoration: line-through;
+    color: #a0a0a0; /* Dims text out when checked OFF */
+}
+
+/* --- SLIDING TOGGLE SWITCH ARCHITECTURE --- */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Hide standard stock browser checkbox */
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The Sliding Track background rail */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #e0e0e0;
+    transition: 0.3s ease;
+    border-radius: 24px;
+}
+
+/* The circular inner core moving thumb knob */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s ease;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* Active Checked (ON) Track Color */
+input:checked + .slider {
+    background-color: #2ecc71; /* High-quality emerald green */
+}
+
+/* Track slider shifting animation transition */
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Delete interactive text button style */
+.delete-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    transition: opacity 0.2s;
+}
+
+.delete-link:hover {
+    opacity: 0.7;
+}

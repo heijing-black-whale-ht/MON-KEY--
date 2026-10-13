@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="static/images/logo.png" alt="Logo" style="max-height: 50px; width: auto; display: block;">
+            </a>
+        </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+
+        <div class="header-icons">
+                <i class="fas fa-search"></i>
+                <i id="hamburger" class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+      <div class="container mt-5">  
+        <h1 class="mb-4">My Tasks</h1>
+        <h2>You have {{ pending_count }} 
+            {% if pending_count == 1 %}
+                pending task
+            {% else %}
+                pending tasks
+            {% endif %}
+        </h2>
+
+        <!-- Add task form-->
+        <form action="/add" method="POST">
+            <input type="text" name="title" placeholder="Add a new task..." required>
+            <button type="submit">Add</button>
+        </form>
+
+        <!-- Task list-->
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li class="{{ 'task-completed' if task['done'] == 1 else '' }}">
+            
+                    <label class="toggle-switch">
+                        <input type="checkbox" 
+                           {% if task['done'] == 1 %}checked{% endif %} 
+                           onclick="window.location.href='/complete/{{ task['id'] }}'">
+                        <span class="slider"></span>
+                    </label>
+
+                    <span class="task-title">{{ task['title'] }}</span>
+            
+                    <a href="/delete/{{ task['id'] }}" class="delete-link">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026, TODO-APP. All Rights Reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
