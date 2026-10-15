@@ -73,47 +73,6 @@ body {
     cursor: pointer;
 }
 
-/* Main Content Area */
-main {
-    max-width: 800px; /* Narrower layout looks cleaner for a todo app */
-    margin: 40px auto;
-    padding: 0 2rem;
-}
-
-h1 {
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-/* Add Task Form Styling */
-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-form input[type="text"] {
-    flex: 1;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-form button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-form button:hover {
-    background-color: #555;
-}
 
 /* Task List Styling (Removes Default Bullets) */
 main ul {
